@@ -32,6 +32,21 @@ $( "#ori" ).click(function() {
   select = true;
 });
 
+//markadores en el mapa: m_ori, m_des
+var m_ori = {
+
+  url: 'img/ori.png'
+};
+
+var m_des = {
+
+  url: 'img/des.png'
+};
+
+//Marcadores google
+var mg_ori;
+var mg_des;
+
 function initMap() {
 
   var markers = [];
@@ -49,19 +64,32 @@ function initMap() {
 
   //Permite añadir un puntero
   function addMarker(location) {
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-    markers.push(marker);
-  }
 
-  //Borrar punteros del mapa
-  function clearMarkers() {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
+    if(select){
+
+      if (mg_ori!=null) {
+        mg_ori.setMap(null);
+      }
+
+      mg_ori = new google.maps.Marker({
+        position: location,
+        icon: m_ori,
+        map: map
+      });
+
+    }else{
+
+      if (mg_des!=null) {
+        mg_des.setMap(null);
+      }
+
+      mg_des = new google.maps.Marker({
+        position: location,
+        icon: m_des,
+        map: map
+      });
+
     }
-
   }
 
   var geocoder = new google.maps.Geocoder();
@@ -78,7 +106,6 @@ function initMap() {
             var longitude = results[0].geometry.location.lng();
             origin = {lat: latitude, lng: longitude};
 
-            clearMarkers();
             addMarker(event.latLng);
             document.getElementById("p1").innerHTML = results[0].formatted_address;
 
@@ -113,7 +140,6 @@ function initMap() {
             var longitude = results[0].geometry.location.lng();
             destination = {lat: latitude, lng: longitude};
 
-            clearMarkers();
             addMarker(event.latLng);
             document.getElementById("p2").innerHTML = results[0].formatted_address;
 
