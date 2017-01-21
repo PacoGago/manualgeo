@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Localización manual</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #map-canvas {
+        height: 600px;
+        width: 800px;
+        margin: 0px;
+        padding: 0px
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row" style="margin: auto; max-width: 800px;">
+        <div class="col-md-12 col-centered">
+          <div id="map-canvas" class="map1"></div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <a href="#" id="ori">Selecciona Origen</a>
+          <br>
+          <p id="p1">Origen: Por definir.</p>
+          <p id="p4">Origin.Street:</p>
+          <p id="p5">Origin.City:</p>
+          <p id="p6">Origin.Territory:</p>
+          <p id="p12">OriginCoordinates.X:</p>
+          <p id="p13">OriginCoordinates.Y:</p>
+        </div>
+
+        <div class="col-md-4">
+          <a href="#" id="des">Selecciona Destino</a>
+          <br>
+          <p id="p2">Destino: Por definir.</p>
+          <p id="p7">Destination.Street:</p>
+          <p id="p8">Destination.City:</p>
+          <p id="p9">Destination.Territory:</p>
+          <p id="p15">DestinationCoordinates.X:</p>
+          <p id="p16">DestinationCoordinates.Y:</p>
+        </div>
+
+        <div class="col-md-4">
+          <a href="#" id="des">API</a>
+          <br>
+          <p id="p3">VehicleModel:</p>
+          <p id="p10">Kms:</p>
+          <p id="p11">TowRequestedTime:</p>
+
+
+        </div>
+      </div>
+    </div>
+    
+    <script src="js/manualgeo.js" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU5L7N5ICxfz74YLztqNv2idPytHhXIiw&callback=initMap" async defer></script>
+  </body>
+</html>
