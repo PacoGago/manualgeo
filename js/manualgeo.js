@@ -21,6 +21,8 @@ function showPosition(position) {
 var origin = {lat: 50.087, lng: 14.421};
 var destination = {lat: 50.087, lng: 14.421};
 
+
+
 var des = false;
 var select = true;
 
@@ -53,15 +55,43 @@ function initMap() {
 
   //************************************************************
   //ATENCION: AQUI LA GEOLOCALIZACION
-  var myLatlng = new google.maps.LatLng(36.71002319999999, -6.1244236);
+  var oriLatlng = new google.maps.LatLng(36.71002319999999, -6.1244236);
   //************************************************************
+  //Dibujar routa
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+  //Aun por definir
+  var desLatlng = new google.maps.LatLng(36.71002319999999, -6.1244236);
 
   var myOptions = {
     zoom: 15,
-    center: myLatlng
+    center: oriLatlng
   }
-  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
+  //Eliminamos los markadores A y B para mantener los nuestros
+  directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  directionsDisplay.setMap(map);
+
+  function calcRoute(lat1,lat2,lng1,lng2){
+
+    var start = new google.maps.LatLng(lat1, lng1);
+    var end = new google.maps.LatLng(lat2, lng2);
+
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+        //directionsDisplay.setMap(map);
+      } else {
+        alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+      }
+    });
+  }
   //Permite añadir un puntero
   function addMarker(location) {
 
@@ -88,7 +118,6 @@ function initMap() {
         icon: m_des,
         map: map
       });
-
     }
   }
 
@@ -167,7 +196,7 @@ function initMap() {
             document.getElementById("p9").innerHTML = "Origin.Territory: " + components.administrative_area_level_2;
             document.getElementById("p15").innerHTML = "No required API: DestinationCoordinates.X: " + longitude;
             document.getElementById("p16").innerHTML = "No required API: DestinationCoordinates.Y: " + latitude;
-
+            calcRoute(origin.lat,destination.lat,origin.lng,destination.lng);
 
             var service = new google.maps.DistanceMatrixService();
             service.getDistanceMatrix(
